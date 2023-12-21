@@ -1,6 +1,4 @@
 <script setup>
-// import { RouterLink, RouterView } from 'vue-router'
-// import Searchbar from './views/SearchBar.vue'
 import SearchBar from './views/SearchBar.vue'
 </script>
 

@@ -23,36 +23,21 @@ const props = defineProps({
 const highlightedCityState = computed(() => {
   if (!props.search) return `${props.obj.city}, ${props.obj.state}`
   let regex = new RegExp(`(${props.search})`, 'gi')
-  return `${props.obj.city}, ${props.obj.state}`.replace(regex, '<mark>$1</mark>')
+  let city = props.obj.city.replace(regex, '<mark>$1</mark>')
+  let state = props.obj.state.replace(regex, '<mark>$1</mark>')
+  return `${city}, ${state}`
 })
 </script>
 
 <template>
-  <table class="table">
+  <table class="w-100 table">
     <tbody>
       <tr>
-        <td v-html="highlightedCityState"></td>
-        <td>{{ props.obj.city }}.replace(props.search,`<mark>${props.search}</mark>`)</td>
-        <td>{{ props.obj.population }}</td>
-        <td>{{ props.obj.growth_from_2000_to_2013 }}</td>
+        <td v-html="highlightedCityState" class="col-6"></td>
+        <td class="col-6">population : {{ props.obj.population }}</td>
       </tr>
     </tbody>
   </table>
 </template>
 
-<style scoped>
-.table {
-  width: 100%;
-  /* border-collapse: collapse; */
-}
-
-.table td {
-  width: 33%;
-  border: 1px solid #e5e5e5;
-  padding: 10px;
-}
-
-.dropItem span {
-  margin-right: 10px;
-}
-</style>
+<style scoped></style>

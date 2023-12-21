@@ -1,6 +1,7 @@
 <script setup>
 import { onBeforeMount, ref, watch } from 'vue'
 import DropdownItem from './DropdownItem.vue'
+import DropContainer from './DropContainer.vue'
 import { getUrl } from '../method/getUrl.js'
 
 const props = defineProps({
@@ -35,24 +36,12 @@ const filterCity = (input) => {
 </script>
 
 <template>
-  <div class="m-10 filterContainer scroll">
+  <DropContainer class="scroll" v-if="props.search !== '' && filterList.length > 0">
     <DropdownItem v-for="item in filterList" :key="item.rank" :obj="item" :search="props.search" />
-  </div>
+  </DropContainer>
+  <DropContainer v-else-if="props.search === ''">Please type something</DropContainer>
+  <DropContainer v-else-if="filterList.length == 0">nomatch</DropContainer>
   <!-- <h1>{{ props.search }}</h1> -->
 </template>
 
-<style scoped>
-.filterContainer {
-  background-color: #f5f5f5;
-  border-radius: 10px;
-  padding: 20px;
-  margin-top: 10px;
-  border: 1px solid #e5e5e5;
-  width: 100%;
-  overflow-y: scroll;
-  max-height: max-content;
-  scrollbar-width: thin;
-  scrollbar-color: blue orange;
-  /* height: 100%; */
-}
-</style>
+<style scoped></style>
